@@ -1,0 +1,53 @@
+version: "3.0"
+
+services :
+  webapp1:
+       container_name: ${WEBAPP_1_NAME}
+       build:
+         context: ./webapp
+         dockerfile: Dockerfile
+       networks:
+         public_net:
+           ipv4_address: ${WEBAPP_1_IP}
+       ports:
+         - "4000:3000"
+       environment:
+            - TAG=${WEBAPP_1_NAME}
+            - SERVER_IP=${WEBAPP_1_IP}
+
+  webapp2:
+       container_name: ${WEBAPP_2_NAME}
+       build:
+         context: ./webapp
+         dockerfile: Dockerfile
+       networks:
+         public_net:
+           ipv4_address: ${WEBAPP_2_IP}
+       ports:
+         - "4001:3000"
+       environment:
+            - TAG=${WEBAPP_2_NAME}
+            - SERVER_IP=${WEBAPP_2_IP}
+
+  haproxy:
+       container_name: ha
+       build:
+         context: ./ha
+         dockerfile: Dockerfile
+       ports:
+         - 80:80
+       expose:
+         - 80
+       networks:
+         public_net:
+           ipv4_address: ${HA_PROXY_IP}
+       environment:
+            - WEBAPP_1_IP=${WEBAPP_1_IP}
+            - WEBAPP_2_IP=${WEBAPP_2_IP}
+networks:
+    public_net:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: ${NETWORK_SUBNET}

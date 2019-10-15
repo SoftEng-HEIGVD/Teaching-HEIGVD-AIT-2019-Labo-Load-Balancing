@@ -1,0 +1,32 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.16.2",
+    "glob": "^7.1.4",
+    "method-override": "^3.0.0",
+    "morgan": "^1.9.1",
+    "serve-favicon": "^2.5.0",
+    "thread-sleep": "^2.2.0",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-develop": "*",
+    "grunt-contrib-stylus": "*",
+    "grunt-contrib-watch": "*",
+    "request": "*",
+    "time-grunt": "*",
+    "load-grunt-tasks": "*"
+  }
+}
