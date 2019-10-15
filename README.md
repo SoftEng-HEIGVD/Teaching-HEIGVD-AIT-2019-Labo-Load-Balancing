@@ -85,7 +85,6 @@ To create the containers we use docker-compose. Execute this command on the main
 You should see output similar to the following:
 
 ```bash
-$ vagrant up
 Creating network "teaching-heigvd-ait-2019-labo-load-balancing_public_net" with driver "bridge"
 Building webapp1
 Step 1/9 : FROM node:latest
@@ -230,7 +229,7 @@ The JMeter test plan is set up in the following way:
 
 4. Provide a screenshot of the summary report from JMeter.
 
-5. In the Vagrant VM, run the following command:
+5. Run the following command:
 
   ```bash
   $ docker stop s1
@@ -499,7 +498,7 @@ Deliver your results at the latest 15 minutes before class Wednesday, November 2
 
 #### Windows troubleshooting
 
-It appears that Windows users can encounter a `CRLF` vs. `LF` problem when the repos is cloned without taking care of the ending lines. Therefore, if the ending lines are `CRFL`, it will produce an error message with Docker during the Vagrant provisioning phase:
+It appears that Windows users can encounter a `CRLF` vs. `LF` problem when the repos is cloned without taking care of the ending lines. Therefore, if the ending lines are `CRFL`, it will produce an error message with Docker:
 
 ```bash
 ... no such file or directory
