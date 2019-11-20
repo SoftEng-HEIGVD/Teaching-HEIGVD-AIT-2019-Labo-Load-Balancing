@@ -446,10 +446,6 @@ $ curl -H "Content-Type: application/json" -X POST -d '{"delay": 1000}' http://<
 To reset the delay configuration, just do a `POST` with 0 as the delay
 value.
 
-Prepare your JMeter script with cookies erased (this will simulate new
-clients for each requests) and 10 threads this will simulate 10
-concurrent users.
-
 *Remark*: In general, take a screenshot of the summary report in
  JMeter to explain what is happening.
 
