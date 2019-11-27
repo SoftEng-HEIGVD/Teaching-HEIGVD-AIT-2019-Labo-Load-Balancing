@@ -37,9 +37,11 @@ services :
        ports:
          - 80:80
          - 1936:1936
+         - 9999:9999
        expose:
          - 80
          - 1936
+         - 9999
        networks:
          public_net:
            ipv4_address: ${HA_PROXY_IP}
