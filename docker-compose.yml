@@ -36,8 +36,10 @@ services :
          dockerfile: Dockerfile
        ports:
          - 80:80
+         - 1936:1936
        expose:
          - 80
+         - 1936
        networks:
          public_net:
            ipv4_address: ${HA_PROXY_IP}
