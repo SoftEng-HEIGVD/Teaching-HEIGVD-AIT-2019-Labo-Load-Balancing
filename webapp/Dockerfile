@@ -1,5 +1,5 @@
 FROM node:latest
-MAINTAINER Laurent Prevost <laurent.prevost@heig-vd.ch>
+LABEL Laurent Prevost <laurent.prevost@heig-vd.ch>
 
 RUN apt-get update && apt-get -y install wget curl vim && apt-get clean && npm install -g bower
 

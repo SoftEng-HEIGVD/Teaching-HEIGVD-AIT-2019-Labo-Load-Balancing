@@ -484,7 +484,7 @@ We propose that you take the time to discover the different strategies in [HAPro
 
 #### References
 
-* [HAProxy Socket commands (drain, ready, ...)](https://cbonte.github.io/haproxy-dconv/configuration-1.5.html#9.2-set%20server)
+* [HAProxy Socket commands (drain, ready, ...)](https://cbonte.github.io/haproxy-dconv/2.2/configuration.html#5.2)
 * [Socat util to run socket commands](http://www.dest-unreach.org/socat/)
 * [Socat command examples](https://stuff.mit.edu/afs/sipb/machine/penguin-lust/src/socat-1.7.1.2/EXAMPLES)
 

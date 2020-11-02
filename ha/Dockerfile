@@ -1,5 +1,5 @@
-FROM haproxy:1.5
-MAINTAINER Laurent Prevost <laurent.prevost@heig-vd.ch>
+FROM haproxy:2.2
+LABEL Laurent Prevost <laurent.prevost@heig-vd.ch>
 
 RUN apt-get update && apt-get -y install wget curl vim rsyslog && apt-get clean
 
