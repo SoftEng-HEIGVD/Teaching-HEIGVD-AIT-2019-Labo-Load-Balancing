@@ -21,7 +21,7 @@ the lab report a structure that mimics the structure of this document.
 
   - Use the Task numbers and question numbers in reference in your report.
 
-  - The version of HAProxy used in this lab is `1.5`. When reading the doc, take care to read the doc corresponding to this version. Here is the link: http://cbonte.github.io/haproxy-dconv/configuration-1.5.html
+  - The version of HAProxy used in this lab is `2.2`. When reading the doc, take care to read the doc corresponding to this version. Here is the link: http://cbonte.github.io/haproxy-dconv/2.2/configuration.html
 
   - During the lab, you will have to modify and play a bit with the [haproxy.cfg](ha/config/haproxy.cfg) file. You will find all the reference links to the official documentation inlined in the file.
 
