@@ -17,7 +17,7 @@ progress in a lab report. Each task specifies one or more deliverables
 to be produced.  Collect all the deliverables in your lab report. Give
 the lab report a structure that mimics the structure of this document.
 
-**Remark**:
+**Remarks**:
 
   - Use the Task numbers and question numbers in reference in your report.
 
@@ -70,9 +70,7 @@ Teaching-HEIGVD-AIT-2019-Labo-02/
 └── tester.jmx
 ```
 
-
-
-We gonna creates three docker containers. One contains HAProxy, the other two contain each a sample
+We are going to create three docker containers. One contains HAProxy, the other two contain each a sample
 web application.
 
 The containers with the web application stand for two web servers that
@@ -99,9 +97,7 @@ Creating s2 ... done
 Creating ha ... done
 ```
 
-
-
-You could verify that you have 3 running containers with the following command :
+You can verify that you have 3 running containers with the following command:
 
 `$ docker ps`
 
@@ -114,13 +110,9 @@ a37cd48f28f5        teaching-heigvd-ait-2019-labo-load-balancing_webapp2   "dock
 da329f9d1ab6        teaching-heigvd-ait-2019-labo-load-balancing_webapp1   "docker-entrypoint.s…"   2 minutes ago       Up 2 minutes        0.0.0.0:4000->3000/tcp   s1
 ```
 
-
-
-You could verify that you have a network bridge who connect the containers :
+You can verify that you have a network bridge that connects the containers with the following command:
 
 `$ docker network ls`
-
-
 
 The two web app containers stand for two web servers. They run a
 NodeJS sample application that implements a simple REST API. Each
@@ -414,7 +406,7 @@ admin stats interface (or also found in the config file).
 
 In this part, we will try to simulate a degraded mode based on the round-robin previously configured.
 
-To help experimenting the balancing when an application started to behave strangely, the web application
+To help experimenting with load balancing when an application starts to behave strangely, the web application
 has a REST resource to configure a delay in the response. You can set
 an arbitrary delay in milliseconds. Once the delay is configured, the
 response will take the amount of time configured.
@@ -453,24 +445,24 @@ value.
 
 *Remark*: Make sure you have the cookies are kept between two requests.
 
-1. Be sure the delay is of 0 milliseconds is set on `s1`. Do a run to have base data to compare with the next experiments.
+1. Make sure a delay of 0 milliseconds is set on `s1`. Do a run to have a baseline to compare with in the next experiments.
 
 2. Set a delay of 250 milliseconds on `s1`. Relaunch a run with the
-    JMeter script and explain what it is happening?
+    JMeter script and explain what is happening.
 
 3. Set a delay of 2500 milliseconds on `s1`. Same than previous step.
 
-4. In the two previous steps, are there any error? Why?
+4. In the two previous steps, are there any errors? Why?
 
 5. Update the HAProxy configuration to add a weight to your nodes. For
     that, add `weight [1-256]` where the value of weight is between the
-    two values (inclusive). Set `s1` to 2 and `s2` to 1. Redo a run with 250ms delay.
+    two values (inclusive). Set `s1` to 2 and `s2` to 1. Redo a run with a 250ms delay.
 
-6. Now, what happened when the cookies are cleared between each requests and the delay is set to 250ms ? We expect just one or two sentence to summarize your observations of the behavior with/without cookies.
+6. Now, what happens when the cookies are cleared between each request and the delay is set to 250ms? We expect just one or two sentence to summarize your observations of the behavior with/without cookies.
 
 ### Task 5: Balancing strategies
 
-In this part of the lab, you will be less guided and you will have more opportunity to play and discover HAProxy. The main goal of this part is to play with various strategies and compare them together.
+In this part of the lab, you will be less guided and you will have more opportunity to play and discover HAProxy. The main goal of this part is to play with various strategies and compare them.
 
 We propose that you take the time to discover the different strategies in [HAProxy documentation](http://cbonte.github.io/haproxy-dconv/configuration-1.6.html#balance) and then pick two of them (can be round-robin but will be better to chose two others). Once you have chosen your strategies, you have to play with them (change configuration, use Jmeter script, do some experiments).
 
@@ -478,9 +470,9 @@ We propose that you take the time to discover the different strategies in [HAPro
 
 1. Briefly explain the strategies you have chosen and why you have chosen them.
 
-2. Provide evidences that you have played with the two strategies (configuration done, screenshots, ...)
+2. Provide evidence that you have played with the two strategies (configuration done, screenshots, ...)
 
-3. Compare the both strategies and conclude which is the best for this lab (not necessary the best at all).
+3. Compare the two strategies and conclude which is the best for this lab (not necessary the best at all).
 
 #### References
 
@@ -488,13 +480,9 @@ We propose that you take the time to discover the different strategies in [HAPro
 * [Socat util to run socket commands](http://www.dest-unreach.org/socat/)
 * [Socat command examples](https://stuff.mit.edu/afs/sipb/machine/penguin-lust/src/socat-1.7.1.2/EXAMPLES)
 
-#### Lab due date
-
-Deliver your results at the latest 15 minutes before class Wednesday, November 25.
-
 #### Windows troubleshooting
 
-git It appears that Windows users can encounter a `CRLF` vs. `LF` problem when the repos is cloned without taking care of the ending lines. Therefore, if the ending lines are `CRFL`, it will produce an error message with Docker:
+It appears that Windows users can encounter a `CRLF` vs. `LF` problem when the repo is cloned without taking care of the ending lines. Therefore, if the ending lines are `CRFL`, it will produce an error message with Docker:
 
 ```bash
 ... no such file or directory
