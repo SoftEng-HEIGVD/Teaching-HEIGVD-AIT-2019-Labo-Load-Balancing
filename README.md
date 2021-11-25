@@ -19,18 +19,18 @@ the lab report a structure that mimics the structure of this document.
 
 **Remarks**:
 
-  - Use the Task numbers and question numbers in reference in your report.
+  - In your report reference the task numbers and question numbers of this document.
 
-  - The version of HAProxy used in this lab is `2.2`. When reading the doc, take care to read the doc corresponding to this version. Here is the link: http://cbonte.github.io/haproxy-dconv/2.2/configuration.html
+  - The version of HAProxy used in this lab is `2.2`. When reading the documentation, make sure that you are looking at the correct version. Here is the link: http://cbonte.github.io/haproxy-dconv/2.2/configuration.html
 
-  - During the lab, you will have to modify and play a bit with the [haproxy.cfg](ha/config/haproxy.cfg) file. You will find all the reference links to the official documentation inlined in the file.
+  - During the lab, you will have to modify and play a bit with the HAProxy configuration file <ha/config/haproxy.cfg>. You will find all the reference links to the official documentation inlined in the file.
 
 ### Task 1: Install the tools
 
-In this part you will install the base tools you need to do the
+In this part you will install the base tools you need to carry out the
 different tasks of this lab.
 
-Install on your local machine Docker to create containers and install Docker-compose to your running multi-container. We provide all the Dockerfiles. Install also JMeter for load testing web applications:
+Install on your local machine Docker to create containers and install `docker-compose` to be able to run a multi-container application. We provide all the Dockerfiles. Install also JMeter for load testing web applications.
 
 * [Docker](https://www.docker.com/)
 * [Docker compose](https://docs.docker.com/compose/)
@@ -40,10 +40,10 @@ Clone the following repository to your machine:
 
 https://github.com/SoftEng-HEIGVD/Teaching-HEIGVD-AIT-2019-Labo-Load-Balancing.git
 
-Normally your folder should look like this :
+The directory structure should look like this:
 
 ```
-Teaching-HEIGVD-AIT-2019-Labo-02/
+Teaching-HEIGVD-AIT-2019-Labo-Load-Balancing/
 ├── assets/
 │   └── ...
 |
@@ -76,7 +76,7 @@ web application.
 The containers with the web application stand for two web servers that
 are load-balanced by HAProxy.
 
-To create the containers we use docker-compose. Execute this command on the main folder
+To create the containers we use `docker-compose`. Execute this command in the root directory:
 
 `$ docker-compose up --build`
 
@@ -132,9 +132,9 @@ You can now navigate to the address of the load balancer
 <http://192.168.42.42> in your favorite browser. The load balancer
 forwards your HTTP request to one of the web app containers.
 
-In the case the previous link does not work, you can access the load balancer
+In case the previous link does not work, you can access the load balancer
 with <http://localhost:80>. If you need to use this address, you will have
-to adapt the laboratory to use this address.
+to adapt the lab instructions accordingly.
 
 Both containers run the same simple test web app. It is modeled as a
 REST resource. To make this lab more "interesting" the app uses
@@ -162,11 +162,11 @@ The fields have the following meaning:
   container. This allows you to identify the container, as each
   receives a different IP address from Docker.
 
-* The field `host` is the hostname of the container and in the Docker
-  context this represents the container ID.
+* The field `host` is the hostname of the container. In the Docker
+  context the hostname is identical to the container ID.
 
-* The `tag` represents the server tag corresponding, in our case, to
-  the container name (docker **--name s1**).
+* The field `tag` represents a server tag. In our case the tag is identical to
+  the container name (we have named the containers `s1` and `s2`, respectively).
 
 * The field `sessionViews` returns a counter that is a session
   variable. The counter is incremented each time the app receives a
@@ -174,13 +174,13 @@ The fields have the following meaning:
   of the load balancer.
 
 * Finally, the field `id` is the session id. You should be able to
-  find that same session id embedded in the session cookie that is
-  sent to the client.
+  find that the same session id is embedded in the session cookie the web server
+  sends to the client.
 
 Now it's time to play a bit with what we did until now.
 
 Open JMeter and then open the script `tester.jmx` present in the root
-folder of the project and follow the instructions given in the
+directory of the project and follow the instructions given in the
 following screenshot (Click on the image and then on RAW button to see the picture in full size. Useful to read the text):
 
 ![JMeter](assets/img/jmeter.png)
@@ -190,7 +190,7 @@ The JMeter test plan is set up in the following way:
 * A Thread Group simulates one user making one hundred GET requests to
   <http://192.168.42.42/>.
 
-* An HTTP Cookie Manager is active on the Thread Group that will send
+* An HTTP Cookie Manager is active on the Thread Group. It will send
   back in the HTTP request any cookies received in previous responses.
 
 * The server tag is extracted from the HTTP response and used for two
@@ -221,7 +221,7 @@ The JMeter test plan is set up in the following way:
 
 4. Provide a screenshot of the summary report from JMeter.
 
-5. Run the following command:
+5. Stop one of the web servers with the following command:
 
   ```bash
   $ docker stop s1
@@ -234,20 +234,20 @@ The JMeter test plan is set up in the following way:
 
 ### Task 2: Sticky sessions
 
-It's time to go further. At this stage, we now have a load balanced
+It's time to go further. At this stage, we now have a load-balanced
 web application but the session management is totally messed up. In
 this task your job is to fix the configuration of HAProxy to enable
 sticky session management.
 
-For that, you will have to play with docker a little bit more. You
-might want to consult the file [Docker quick reference](Docker quick reference.md) for some
+For that, you will have to play with Docker a little bit more. You
+might want to consult the file `Docker quick reference.md` for some
 useful commands and hints.
 
 **Deliverables:**
 
-1. There is different way to implement the sticky session. One possibility is to use the SERVERID provided by HAProxy. Another way is to use the NODESESSID provided by the application. Briefly explain the difference between both approaches (provide a sequence diagram with cookies to show the difference).
+1. There are different ways to implement sticky sessions with HAProxy. One possibility is to use the cookie `SERVERID` provided by HAProxy. Another way is to use the cookie `NODESESSID` provided by the web server. Briefly explain the difference between both approaches (provide a sequence diagram with cookies to show the difference).
 
-  * Choose one of the both stickiness approach for the next tasks.
+  * Choose one of two stickiness approaches for the next tasks.
 
 2. Provide the modified `haproxy.cfg` file with a short explanation of
     the modifications you did to enable sticky session management.
@@ -269,11 +269,12 @@ useful commands and hints.
 
   * Clear the results in JMeter.
 
-  * Now, update the JMeter script. Go in the HTTP Cookie Manager and
-    <del>uncheck</del><ins>verify that</ins> the box `Clear cookies each iteration?`
-    <ins>is unchecked</ins>.
+  * Now, update the JMeter script. 
 
-  * Go in `Thread Group` and update the `Number of threads`. Set the value to 2.
+      * Go in `Thread Group` and update the `Number of threads`. Set the value to 2.
+
+      * Go in the HTTP Cookie Manager and verify that the box `Clear cookies each iteration?`
+        is unchecked.
 
 7. Provide a screenshot of JMeter's summary report. Give a short
     explanation of what the load balancer is doing.
@@ -301,19 +302,19 @@ running called `s1` and `s2`.
 
 When all the infra is up and running, perform the following steps:
 
-1. Open a browser on your host
+1. Open a browser on your machine.
 
 2. Navigate to `http://192.168.42.42`. You will reach one of the two
    nodes. Let's assume it is `s1` but in your case, it could be `s2`
    as the balancing strategy is roundrobin.
 
 3. Refresh the page. You should get the same result except that the
-   views counter is incremented.
+   `sessionViews` counter is incremented.
 
 4. Refresh multiple times the page and verify that you continue to
-   reach the same node and see the sessionViews counter increased.
+   reach the same node and see the `sessionViews` counter increased.
 
-5. In a different tab, open `http://192.168.42.42:1936` and take a
+5. In a different tab, open HAProxy's statistics report page at `http://192.168.42.42:1936` and take a
    look. You should have something similar to the following
    screenshot.
 
@@ -326,9 +327,9 @@ to query its status and send commands to it. HAProxy provides the
 command line via a TCP socket so that a system administrator is able
 to connect to it when HAProxy runs on a remote server. You will use
 `socat` to connect to the TCP socket. `socat` is a universal
-command-line tool to connect pretty much anything with anything. You may need to install it
+command-line tool to connect pretty much anything with anything. You may need to install it.
 
-To use it type the following:
+To use it, type the following:
 
 ```bash
 $ socat - tcp:192.168.42.42:9999
@@ -361,31 +362,25 @@ Now, to set a node's state to `ready`, `maint` or `drain`, enter the
 following command:
 
 ```bash
-> set server nodes/<containerName> state <state>
+> set server <backendName>/<serverName> state <state>
 ```
 
-**Note:** In fact, the `nodes` is the group of backend nodes
-  labelled. You will find the corresponding `backend nodes` in ha
-  config.
+**Note:** _backendName:_ In the HAProxy configuration, the web servers are always grouped in a so-called backend. Look for the `backend` directive in the config file. We have given our backend the name `nodes`.
 
-**Note 2:** The containerName is the label of the node. In fact, in
-this lab, we used the same name as Docker container names but both
-names are not linked together. We can choose different names if we
-want. The name set in this command is the name present in the HAProxy
-admin stats interface (or also found in the config file).
+**Note 2:** _serverName:_ is the name of the server as declared in the HAProxy config file with the `server` directive. HAProxy uses these names also in the statistics report page. We have named them `s1` and `s2` so that they correspond to the tags returned by the servers and the container names. 
 
-**Note 3:** We will use only the three states presented there. Take
-  care that the command only accept lower cases states.
+**Note 3:** We will use only the three states presented there. Be careful
+  with the letter case as the command line accepts states only in lower case.
 
 **Deliverables:**
 
-1. Take a screenshot of the Step 5 and tell us which node is answering.
+1. Take a screenshot of step 5 and tell us which node is answering.
 
 2. Based on your previous answer, set the node in DRAIN mode. Take a
     screenshot of the HAProxy state page.
 
 3. Refresh your browser and explain what is happening. Tell us if you
-    stay on the same node or not. If yes, why? If no, why?
+    stay on the same node or not. If yes, why? If not, why?
 
 4. Open another browser and open `http://192.168.42.42`. What is
     happening?
@@ -443,7 +438,7 @@ value.
 
 **Deliverables:**
 
-*Remark*: Make sure you have the cookies are kept between two requests.
+*Remark*: Make sure JMeter keeps the cookies between requests.
 
 1. Make sure a delay of 0 milliseconds is set on `s1`. Do a run to have a baseline to compare with in the next experiments.
 
